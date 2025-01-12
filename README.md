@@ -1,5 +1,5 @@
-# My Library
-Biblioteca para facilitar a criação de scripts em Python.  
+# pymnz
+Biblioteca para facilitar a criação de scripts de bot e automações em Python.  
 
 ## Instalação
 ```bash
