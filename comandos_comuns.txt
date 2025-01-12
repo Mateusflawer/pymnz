@@ -1,0 +1,19 @@
+6. Publicação
+
+    Teste o pacote localmente:
+        bash
+            pip install -e .
+
+    Prepare para envio ao PyPI:
+
+        Instale ferramentas necessárias:
+            bash
+                pip install twine setuptools wheel
+
+        Gere os arquivos distribuíveis:
+            bash
+                python setup.py sdist bdist_wheel
+
+        Envie para o PyPI:
+            bash
+                twine upload dist/*
