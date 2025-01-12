@@ -3,12 +3,11 @@ Biblioteca para facilitar a criação de scripts em Python.
 
 ## Instalação
 ```bash
-pip install mypyscript
+pip install pymnz
 
 
 # USO BÁSICO
-from mypyscript.core import fetch_api_data
+from mnz.core import soma
 
-data = fetch_api_data("https://api.exemplo.com/data")
-print(data)
-
+resultado = soma(10, 30)
+print(resultado)  # output: 30
