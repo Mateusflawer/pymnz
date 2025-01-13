@@ -2,14 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name="pymnz",
-    version="0.1.3",
+    version="0.1.4",
     author="Mateus Menezes",
     author_email="mateusflawer@gmail.com",
     description=(
         "Uma biblioteca para facilitar"
         " a criação de scripts de automações com Python"
     ),
-    long_description=open("README.md").read(),
+    long_description=open("README.md", encoding='utf-8').read(),
     long_description_content_type="text/markdown",
     url="https://github.com/mateusflawer/pymnz",
     packages=find_packages(),

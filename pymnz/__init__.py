@@ -1,5 +1,10 @@
-from .core import calculos
-
+from .utils import (
+    classes,
+    errors,
+    times,
+)
 __all__ = [
-    calculos
+    classes,
+    errors,
+    times,
 ]
