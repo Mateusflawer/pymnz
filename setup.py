@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pymnz",
-    version="0.1.4",
+    version="0.1.5",
     author="Mateus Menezes",
     author_email="mateusflawer@gmail.com",
     description=(
@@ -11,7 +11,7 @@ setup(
     ),
     long_description=open("README.md", encoding='utf-8').read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/mateusflawer",
+    url="https://github.com/mateusflawer/pymnz",
     packages=find_packages(),
     install_requires=[  # Inclua dependências aqui
     ],

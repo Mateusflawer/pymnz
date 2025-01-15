@@ -9,5 +9,17 @@ pip install pymnz
 # USO BÁSICO
 import pymnz
 
-resultado = pymnz.calculos.soma(10, 30)
-print(resultado)  # output: 30
+
+@pymnz.classes.singleton
+class Carro:
+    ...
+
+
+carro1 = Carro()
+carro2 = Carro()
+
+
+if carro1 is carro2:
+    print('Mesmo carro')
+else:
+    print('Carro diferente')
