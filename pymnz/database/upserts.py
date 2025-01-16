@@ -1,11 +1,10 @@
 from .updates import update_table_from_dataframe
 from .inspections import table_exists
 from .changes import unique_column, id_autoincrement
-import pandas as pd
 
 
 def upsert_table_database(
-    df: pd.DataFrame, conn, table_name, key_col
+    df, conn, table_name, key_col
 ) -> int | None:
     """
     Insere ou atualiza registros de cercas na web.
@@ -15,8 +14,12 @@ def upsert_table_database(
     :param conn: Conexão ativa com o banco de dados.
     :return: Número de linhas afetadas ou None.
     """
+
+    # Importar somente quando necessário
+    import pandas as pd
+
     # Substituir valores NaN por None
-    df = df.where(pd.notnull(df), None)
+    df = df.where(pd.notna(df), None)
 
     # Verifica se a tabela existe
     if not table_exists(conn, table_name):

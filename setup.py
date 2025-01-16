@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pymnz",
-    version="0.1.6",
+    version="0.1.7",
     author="Mateus Menezes",
     author_email="mateusflawer@gmail.com",
     description=(
@@ -14,9 +14,6 @@ setup(
     url="https://github.com/mateusflawer/pymnz",
     packages=find_packages(),
     install_requires=[  # Inclua dependências aqui
-        'pandas',
-        'sqlalchemy',
-        'mysql-connector-python'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

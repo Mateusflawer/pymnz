@@ -1,4 +1,3 @@
-from sqlalchemy import text
 
 
 def table_exists(conn, table_name):
@@ -9,6 +8,10 @@ def table_exists(conn, table_name):
     :param table_name: Nome da tabela para verificar.
     :return: True se a tabela existir, caso contrário, False.
     """
+
+    # Importar somente quando necessário
+    from sqlalchemy import text
+
     query = text("""
         SELECT EXISTS (
             SELECT 1
@@ -16,5 +19,9 @@ def table_exists(conn, table_name):
             WHERE table_name = :table_name
         );
     """)
-    result = conn.execute(query, {"table_name": table_name})
+
+    # Executar query
+    params = {"table_name": table_name}
+    result = conn.execute(query, params)
+
     return result.scalar()  # Retorna True ou False
