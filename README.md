@@ -7,10 +7,10 @@ pip install pymnz
 
 
 # USO BÁSICO
-import pymnz
+from pymnz import utils
 
 
-@pymnz.classes.singleton
+@utils.classes.singleton
 class Carro:
     ...
 

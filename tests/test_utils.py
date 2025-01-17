@@ -1,9 +1,9 @@
-import pymnz
+from pymnz import utils
 
 
 def test_classes_singleton():
     # Classe
-    @pymnz.classes.singleton
+    @utils.classes.singleton
     class TestClass():
         ...
 
