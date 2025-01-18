@@ -1,7 +1,12 @@
 from .dict_util import replace_invalid_values
 
 
-def update_table_from_dataframe(df, table_name, primary_key, conn):
+def update_table_from_dataframe(
+    df,
+    table_name: str,
+    primary_key: str,
+    conn
+) -> int:
     """
     Atualiza uma tabela no banco de dados MySQL com base em um DataFrame.
 

@@ -1,4 +1,4 @@
-def unique_column(conn, table_name, key_col):
+def unique_column(conn, table_name: str, key_col: str) -> None:
     """Alterar coluna para que seja única"""
     # Importar somente o que é necessário
     from sqlalchemy import text
@@ -10,7 +10,7 @@ def unique_column(conn, table_name, key_col):
     conn.execute(query)
 
 
-def id_autoincrement(conn, table_name):
+def id_autoincrement(conn, table_name: str) -> None:
     """Alterar tabela para adicionar a coluna 'id' com autoincrement"""
     # Importar somente o que é necessário
     from sqlalchemy import text

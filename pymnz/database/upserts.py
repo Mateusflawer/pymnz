@@ -5,7 +5,7 @@ from .changes import unique_column, id_autoincrement
 
 def upsert_table_database(
     df, conn, table_name, key_col
-) -> int | None:
+) -> int:
     """
     Insere ou atualiza registros de cercas na web.
 

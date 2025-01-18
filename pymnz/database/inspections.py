@@ -1,6 +1,4 @@
-
-
-def table_exists(conn, table_name):
+def table_exists(conn, table_name: str) -> bool:
     """
     Verifica se uma tabela existe no banco de dados.
 
