@@ -1,5 +1,6 @@
 from pymnz import utils
 import sys
+import os
 
 
 @utils.classes.singleton
@@ -27,6 +28,9 @@ class Script:
         print(self.separator_format * self.width)
 
     def run(self):
+        # Limpar console
+        os.system('cls')
+
         self._show_header()
 
         try:
