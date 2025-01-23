@@ -21,13 +21,17 @@ class Script:
         print(str(self.name).upper().center(self.width))
         print(self.separator_format * self.width)
 
-    @utils.errors.retry_on_failure(1000)
     def _run_code(self):
         """Rodar código"""
         self.code()
         print(self.separator_format * self.width)
 
-    def run(self):
+    @utils.errors.retry_on_failure(1000)
+    def _run_code_with_retry_on_failure(self):
+        """Rodar código com repetição por falha"""
+        self._run_code()
+
+    def run(self, with_retry_on_failure: bool = True):
         # Limpar console
         os.system('cls')
 
@@ -35,7 +39,13 @@ class Script:
 
         try:
             while True:
-                self._run_code()
+                # Com repetição por falha
+                if with_retry_on_failure:
+                    self._run_code_with_retry_on_failure()
+
+                # Sem repetição por falha
+                else:
+                    self._run_code()
 
                 # Aguardar o intervalo
                 utils.times.countdown_timer(
