@@ -17,7 +17,7 @@ class FunctionExecutor:
 
         class_name = self.__class__.__name__
         logging.info(
-            f'({class_name}) Iniciando a execução das funções armazenadas.')
+            f'({class_name}) Executando funções armazenadas')
 
         if self.results:
             for func, args, kwargs in self.results:
@@ -27,7 +27,7 @@ class FunctionExecutor:
                     logging.error(f"Erro ao executar {func.__name__}: {e}")
         else:
             logging.info(
-                f"({class_name}) Nenhuma função armazenada para execução.")
+                f"({class_name}) Nenhuma função armazenada para execução")
 
     def clear_results(self) -> None:
         """Limpa a lista de funções armazenadas."""
