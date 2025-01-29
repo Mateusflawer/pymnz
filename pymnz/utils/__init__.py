@@ -7,8 +7,12 @@ from .errors import (
 from .times import (
     countdown_timer,
 )
+from .string import (
+    search_str,
+)
 __all__ = [
     singleton,
     retry_on_failure,
     countdown_timer,
+    search_str
 ]
