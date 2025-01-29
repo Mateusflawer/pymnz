@@ -40,12 +40,12 @@ class Script:
         try:
             while True:
                 # Com repetição por falha
-                if with_retry_on_failure:
-                    self._run_code_with_retry_on_failure()
+                match with_retry_on_failure:
+                    case True:
+                        self._run_code_with_retry_on_failure()
 
-                # Sem repetição por falha
-                else:
-                    self._run_code()
+                    case _:
+                        self._run_code()
 
                 # Aguardar o intervalo
                 utils.times.countdown_timer(
