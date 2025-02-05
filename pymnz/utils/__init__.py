@@ -12,6 +12,9 @@ from .times import (
 from .string import (
     search_str,
 )
+from .value_helpers import (
+    replace_invalid_values,
+)
 
 __all__ = [
     # Classes
@@ -26,5 +29,8 @@ __all__ = [
     convert_time_to_unit,
 
     # Strings
-    search_str
+    search_str,
+
+    # Value Helpers
+    replace_invalid_values,
 ]

@@ -1,4 +1,4 @@
-from .dict_util import replace_invalid_values
+from pymnz.utils import replace_invalid_values
 
 
 def update_table_from_dataframe(

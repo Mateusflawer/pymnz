@@ -101,3 +101,26 @@ def test_convert_time_to_unit():
     # Segundos anormais 3
     unit = utils.convert_time_to_unit(time_str4, 'seconds')
     assert unit == 0.0
+
+
+def test_replace_invalid_values():
+    import pandas as pd
+    import datetime
+
+    data = [
+        {"name": "Alice", "age": 30, "birthdate": pd.Timestamp("1990-01-01")},
+        {"name": "Bob", "age": pd.NA, "birthdate": pd.NaT},
+        {"name": "Charlie", "age": 25, "birthdate": None}
+    ]
+
+    # Converter
+    cleaned_data = utils.replace_invalid_values(data)
+
+    saida = [
+        {'name': 'Alice', 'age': 30, 'birthdate': datetime.datetime(
+            1990, 1, 1, 0, 0)},
+        {'name': 'Bob', 'age': None, 'birthdate': None},
+        {'name': 'Charlie', 'age': 25, 'birthdate': None}
+    ]
+
+    assert cleaned_data == saida, 'Valores inválidos não foram substituídos'
