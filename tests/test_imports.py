@@ -26,3 +26,12 @@ def test_import_database():
     unique_column
     id_autoincrement
     table_exists
+
+
+def test_import_models():
+    from pymnz.models import (
+        FunctionExecutor,
+        Script,
+    )
+    FunctionExecutor
+    Script

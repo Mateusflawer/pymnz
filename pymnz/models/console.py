@@ -31,7 +31,7 @@ class Script:
         """Rodar código com repetição por falha"""
         self._run_code()
 
-    def run(self, with_retry_on_failure: bool = True):
+    def run(self, retry_on_failure: bool = True):
         # Limpar console
         os.system('cls')
 
@@ -40,7 +40,7 @@ class Script:
         try:
             while True:
                 # Com repetição por falha
-                match with_retry_on_failure:
+                match retry_on_failure:
                     case True:
                         self._run_code_with_retry_on_failure()
 
