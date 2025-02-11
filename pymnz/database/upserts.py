@@ -4,7 +4,7 @@ from .changes import unique_column, id_autoincrement
 
 
 def upsert_table_database(
-    df, conn, table_name, key_col
+    df, conn, table_name: str, key_col: str
 ) -> int:
     """
     Insere ou atualiza registros de cercas na web.
@@ -17,6 +17,10 @@ def upsert_table_database(
 
     # Importar somente quando necessário
     import pandas as pd
+
+    # Verificar se a coluna de chave primária existe
+    if key_col not in df.columns:
+        raise ValueError(f"A coluna '{key_col}' não existe no DataFrame")
 
     # Substituir valores NaN por None
     df = df.where(pd.notna(df), None)
