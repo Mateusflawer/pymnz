@@ -1,8 +1,10 @@
-import pandas as pd
-
-
 def replace_invalid_values(values: list[dict]) -> list[dict]:
     """Função para substituir valores indesejados por None"""
+
+    # Importar somente quando necessário
+    import pandas as pd
+
+    # Verificar se o argumento é uma lista
     if not isinstance(values, list):
         raise TypeError("O argumento deve ser uma lista de dicionários")
 

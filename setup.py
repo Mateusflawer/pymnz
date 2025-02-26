@@ -14,6 +14,7 @@ setup(
     url="https://github.com/mateusflawer/pymnz",
     packages=find_packages(),
     install_requires=[  # Inclua dependências aqui
+        'pandas',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
