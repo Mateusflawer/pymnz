@@ -1,25 +1,16 @@
-import pymnz
-
+from pymnz.models import Script
 
 def soma(a, b):
-    result = a + b
-    print(f"A soma de {a} + {b} é {result}.")
-    return result
-
+  print(f'A soma de {a} + {b} é {a + b}.')
+  raise Exception('Teste de execução')
 
 def subtracao(a, b):
-    result = a - b
-    print(f"A subtração de {a} - {b} é {result}.")
-    return result
+  print(f"A subtração de {a} - {b} é {a - b}.")
+  return a - b
 
-
-if __name__ == "__main__":
-    function_executor = pymnz.models.FunctionExecutor()
-    function_executor.add_function(soma)
-    function_executor.execute_all(b=1, a=2)
-    function_executor.clear_results()
-
-    # Executar funções
-    function_executor.add_function(subtracao)
-    function_executor.execute_all(10, 11)
-    function_executor.clear_results()
+try:
+  script = Script('Script de teste', soma, a=1, b=2)
+  script.set_code_start(subtracao, 1, 2)
+  script.run(True)
+except Exception as e:
+  assert str(e) == 'Teste de execução'

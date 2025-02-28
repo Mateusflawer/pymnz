@@ -6,7 +6,7 @@ def countdown_timer(wait_seconds: int, msg_wait=""):
     """Conta por segundos"""
 
     for i in range(wait_seconds, 0, -1):
-        print(f"{msg_wait} {i} segundo(s)...{' '*10}", end='\r')
+        print(f"{msg_wait} {i} second(s)...{' '*10}", end='\r')
         time.sleep(1)  # Espera 1 segundo
 
     # Encerramento
@@ -46,7 +46,7 @@ def convert_time_to_unit(
             elif unit == 'hours':
                 return total_seconds / 3600
             else:
-                raise ValueError(f"Unidade inválida: {unit}")
+                raise ValueError(f"Invalid unit: {unit}")
         except ValueError:
             # Retornar 0 se a string não estiver no formato correto
             return 0.0

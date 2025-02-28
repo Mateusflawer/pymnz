@@ -8,6 +8,9 @@ import os
 class Script:
     def __init__(self, name, code, *args, **kwargs):
         self.name = name
+        self.code_start = None
+        self.args_start = None
+        self.kwargs_start = None
         self.code = code
         self.args = args
         self.kwargs = kwargs
@@ -24,15 +27,16 @@ class Script:
         print(str(self.name).upper().center(self.width))
         print(self.separator_format * self.width)
 
-    def _run_code(self):
+    def _run_code(self, code, *args, **kwargs):
         """Rodar código"""
-        self.code(*self.args, **self.kwargs)
-        print(self.separator_format * self.width)
+        if code is not None:
+            code(*args, **kwargs)
+            print(self.separator_format * self.width)
 
     @retry_on_failure(1000)
-    def _run_code_with_retry_on_failure(self):
+    def _run_code_with_retry_on_failure(self, code, *args, **kwargs):
         """Rodar código com repetição por falha"""
-        self._run_code()
+        self._run_code(code, *args, **kwargs)
 
     def run(self, retry_on_failure: bool = True):
         # Limpar console
@@ -43,14 +47,17 @@ class Script:
 
         try:
             while True:
+                # Rodar código inicial
+                self._run_code(self.code_start, *self.args_start, **self.kwargs_start)
+
                 match retry_on_failure:
                     # Com repetição por falha
                     case True:
-                        self._run_code_with_retry_on_failure()
+                        self._run_code_with_retry_on_failure(self.code, *self.args, **self.kwargs)
 
                     # Sem repetição por falha
                     case _:
-                        self._run_code()
+                        self._run_code(self.code, *self.args, **self.kwargs)
 
                 # Aguardar o intervalo
                 countdown_timer(
@@ -59,3 +66,11 @@ class Script:
         except KeyboardInterrupt:
             print(self.terminator_format * self.width)
             sys.exit(self.terminator_msg)
+
+    def set_code_start(self, code, *args, **kwargs):
+        """ Adicionar código inicial """
+        self.code_start = code
+        self.args_start = args
+        self.kwargs_start = kwargs
+
+        return self

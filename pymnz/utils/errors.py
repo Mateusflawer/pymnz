@@ -1,3 +1,4 @@
+from .times import countdown_timer
 import logging
 import time
 
@@ -23,7 +24,7 @@ def retry_on_failure(max_retries: int):
                     logging.error(f"Attempt {attempts}/{max_retries} "
                                   f"failed with error: {e}")
                     if attempts < max_retries:
-                        time.sleep(5 * attempts)  # Exponential backoff
+                        countdown_timer(5 * attempts, 'Retrying in')  # Exponential backoff
                     else:
                         logging.error("All retry attempts failed.")
                         return None
