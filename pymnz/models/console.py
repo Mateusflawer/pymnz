@@ -46,10 +46,11 @@ class Script:
         self._show_header()
 
         try:
-            while True:
-                # Rodar código inicial
-                self._run_code(self.code_start, *self.args_start, **self.kwargs_start)
+            # Rodar código inicial
+            self._run_code(self.code_start, *self.args_start, **self.kwargs_start)
 
+            # Rodar código
+            while True:
                 match retry_on_failure:
                     # Com repetição por falha
                     case True:
@@ -59,9 +60,7 @@ class Script:
                     case _:
                         self._run_code(self.code, *self.args, **self.kwargs)
 
-                # Aguardar o intervalo
-                countdown_timer(
-                    self.execution_interval, self.execution_interval_msg)
+                countdown_timer(self.execution_interval, self.execution_interval_msg)
 
         except KeyboardInterrupt:
             print(self.terminator_format * self.width)
