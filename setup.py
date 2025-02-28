@@ -14,8 +14,6 @@ setup(
     url="https://github.com/mateusflawer/pymnz",
     packages=find_packages(),
     install_requires=[  # Inclua dependências aqui
-        'pandas',
-        'sqlalchemy',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
