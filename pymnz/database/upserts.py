@@ -4,7 +4,7 @@ from .changes import unique_column, id_autoincrement
 
 
 def upsert_table_database(
-    df, conn, table_name: str, key_col: str
+    df, conn, table_name: str, key_col: str, chunk_size: int = 500
 ) -> int:
     """
     Insere ou atualiza registros de cercas na web.
@@ -34,7 +34,7 @@ def upsert_table_database(
             conn,
             if_exists='replace',
             index=False,
-            chunksize=500,
+            chunksize=chunk_size,
         )
 
         # Definir uma coluna id com autoincrement
@@ -46,7 +46,7 @@ def upsert_table_database(
         return len(df)  # Número de linhas inseridas
 
     # Atualizar a tabela existente em chunks
-    chunksize = 1000
+    chunksize = chunk_size
 
     # Para rastrear o total de linhas afetadas
     total_rows_affected = 0
