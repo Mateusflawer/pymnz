@@ -1,16 +1,23 @@
 from pymnz.models import Script
 
-def soma(a, b):
+def soma(a=1, b=1):
   print(f'A soma de {a} + {b} é {a + b}.')
   raise Exception('Teste de execução')
 
-def subtracao(a, b):
+def subtracao(a=1, b=1):
   print(f"A subtração de {a} - {b} é {a - b}.")
   return a - b
 
+def soma_doida():
+  a = 1
+  b = 123
+  print(f'A soma de {a} + {b} é {a + b}.')
+  return a + b
+
 try:
-  script = Script('Script de teste', soma, a=1, b=2)
-  script.set_code_start(subtracao, 5, 10)
-  script.run(True)
+  script = Script('Script de teste', subtracao)
+  script.run()
+  
 except Exception as e:
   assert str(e) == 'Teste de execução'
+

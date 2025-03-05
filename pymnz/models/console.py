@@ -56,7 +56,8 @@ class Script:
 
         try:
             # Rodar código inicial
-            self._run(self.code_start, with_retry_on_failure, *self.args_start, **self.kwargs_start)
+            if self.code_start is not None:
+                self._run(self.code_start, with_retry_on_failure, *self.args_start, **self.kwargs_start)
 
             # Rodar código
             while True:
