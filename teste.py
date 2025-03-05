@@ -10,7 +10,7 @@ def subtracao(a, b):
 
 try:
   script = Script('Script de teste', soma, a=1, b=2)
-  script.set_code_start(subtracao, 1, 2)
+  script.set_code_start(subtracao, 5, 10)
   script.run(True)
 except Exception as e:
   assert str(e) == 'Teste de execução'

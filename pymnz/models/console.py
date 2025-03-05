@@ -38,18 +38,16 @@ class Script:
         """Rodar código com repetição por falha"""
         self._run_code(code, *args, **kwargs)
 
-    def _run(self, code, retry_on_failure, *args, **kwargs):
+    def _run(self, code, with_retry_on_failure, *args, **kwargs):
         """ Rodar código de acordo com os parâmetros """
-        match retry_on_failure:
-            # Com repetição por falha
-            case True:
-                self._run_code_with_retry_on_failure(code, *self.args, **self.kwargs)
+        # Com repetição por falha
+        if with_retry_on_failure:
+            self._run_code_with_retry_on_failure(code, *args, **kwargs)
 
-            # Sem repetição por falha
-            case _:
-                self._run_code(code, *self.args, **self.kwargs)
+        else:  # Sem repetição por falha
+            self._run_code(code, *args, **kwargs)
 
-    def run(self, retry_on_failure: bool = True):
+    def run(self, with_retry_on_failure: bool = True):
         # Limpar console
         os.system('cls')
 
@@ -58,11 +56,11 @@ class Script:
 
         try:
             # Rodar código inicial
-            self._run(self.code_start, retry_on_failure, *self.args_start, **self.kwargs_start)
+            self._run(self.code_start, with_retry_on_failure, *self.args_start, **self.kwargs_start)
 
             # Rodar código
             while True:
-                self._run(self.code, retry_on_failure, *self.args, **self.kwargs)
+                self._run(self.code, with_retry_on_failure, *self.args, **self.kwargs)
 
                 countdown_timer(self.execution_interval, self.execution_interval_msg)
 
