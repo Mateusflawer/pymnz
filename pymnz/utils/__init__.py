@@ -1,13 +1,12 @@
 from .classes import (
     singleton,
 )
-from .errors import (
-    retry_on_failure,
-)
 from .times import (
     countdown_timer,
     convert_unit_to_time,
     convert_time_to_unit,
+    retry_on_failure,
+    async_countdown_timer,
 )
 from .string import (
     search_str,
@@ -20,13 +19,12 @@ __all__ = [
     # Classes
     singleton,
 
-    # Errors
-    retry_on_failure,
-
     # Times
+    retry_on_failure,
     countdown_timer,
     convert_unit_to_time,
     convert_time_to_unit,
+    async_countdown_timer,
 
     # Strings
     search_str,
