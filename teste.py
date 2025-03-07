@@ -1,23 +1,18 @@
 from pymnz.models import Script
+import asyncio
 
-def soma(a=1, b=1):
+
+async def async_soma(a, b):
   print(f'A soma de {a} + {b} é {a + b}.')
-  raise Exception('Teste de execução')
+  await asyncio.sleep(1)
+  return a + b
 
-def subtracao(a=1, b=1):
-  print(f"A subtração de {a} - {b} é {a - b}.")
-  return a - b
 
-def soma_doida():
-  a = 1
-  b = 123
+def soma(a, b):
   print(f'A soma de {a} + {b} é {a + b}.')
   return a + b
 
-try:
-  script = Script('Script de teste', subtracao)
-  script.run()
-  
-except Exception as e:
-  assert str(e) == 'Teste de execução'
 
+if __name__ == "__main__":
+  script = Script("Script de teste", async_soma, 1, 2)
+  script.run()
