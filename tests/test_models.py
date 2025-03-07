@@ -17,3 +17,8 @@ def test_models_script():
     script.run(False)
   except Exception as e:
     assert str(e) == 'Teste de execução'
+
+
+def test_model_script_singleton():
+  script = Script('Script de teste', None)
+  assert script is Script('Script de teste', None), "Singleton"
