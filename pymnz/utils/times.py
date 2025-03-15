@@ -1,16 +1,94 @@
 import time
-from typing import Literal
+import asyncio
+import logging
+from functools import wraps
+from typing import Callable, Literal
 
 
-def countdown_timer(wait_seconds: int, msg_wait=""):
-    """Conta por segundos"""
+async def async_countdown_timer(wait_seconds: int, msg_wait: str = ""):
+    """
+    Contagem regressiva assíncrona.
 
+    Parameters:
+        wait_seconds (int): Número de segundos para a contagem regressiva.
+        msg_wait (str): Mensagem a ser exibida durante a contagem regressiva.
+    """
     for i in range(wait_seconds, 0, -1):
         print(f"{msg_wait} {i} second(s)...{' '*10}", end='\r')
-        time.sleep(1)  # Espera 1 segundo
+        await asyncio.sleep(1)  # Espera assíncrona de 1 segundo
 
     # Encerramento
-    print(' '*100, end='\r')
+    print(' ' * 100, end='\r')
+
+
+def countdown_timer(wait_seconds: int, msg_wait: str = ""):
+    """
+    Contagem regressiva assíncrona.
+
+    Parameters:
+        wait_seconds (int): Número de segundos para a contagem regressiva.
+        msg_wait (str): Mensagem a ser exibida durante a contagem regressiva.
+    """
+    for i in range(wait_seconds, 0, -1):
+        print(f"{msg_wait} {i} second(s)...{' '*10}", end='\r')
+        time.sleep(1)  # Espera assíncrona de 1 segundo
+
+    # Encerramento
+    print(' ' * 100, end='\r')
+
+
+def retry_on_failure(max_retries: int):
+    """
+    Decorator that retries the execution of a function in case of failure.
+    Supports both synchronous and asynchronous functions.
+
+    Parameters:
+        max_retries (int): Maximum number of retry attempts.
+
+    Returns:
+        The decorated function which will be executed with retries.
+    """
+    def decorator(function: Callable):
+        @wraps(function)
+        async def async_wrapper(*args, **kwargs):
+            attempts = 0
+            while attempts < max_retries:
+                try:
+                    if asyncio.iscoroutinefunction(function):
+                        return await function(*args, **kwargs)
+                    else:
+                        return function(*args, **kwargs)
+                except Exception as e:
+                    attempts += 1
+                    logging.error(f"Attempt {attempts}/{max_retries} failed with error: {e}")
+                    if attempts < max_retries:
+                        await async_countdown_timer(5 * attempts, 'Retrying in')  # Exponential backoff
+                    else:
+                        logging.error("All retry attempts failed.")
+                        return None
+
+        @wraps(function)
+        def sync_wrapper(*args, **kwargs):
+            attempts = 0
+            while attempts < max_retries:
+                try:
+                    return function(*args, **kwargs)
+                except Exception as e:
+                    attempts += 1
+                    logging.error(f"Attempt {attempts}/{max_retries} failed with error: {e}")
+                    if attempts < max_retries:
+                        countdown_timer(5 * attempts, 'Retrying in')  # Exponential backoff
+                    else:
+                        logging.error("All retry attempts failed.")
+                        return None
+
+        # Retorna o wrapper apropriado dependendo se a função é assíncrona ou não
+        if asyncio.iscoroutinefunction(function):
+            return async_wrapper
+        else:
+            return sync_wrapper
+
+    return decorator
 
 
 def convert_time_to_unit(
