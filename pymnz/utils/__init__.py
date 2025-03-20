@@ -14,6 +14,10 @@ from .string import (
 from .value_helpers import (
     replace_invalid_values,
 )
+from .geometric_calculations import (
+    geographic_center,
+    calculate_distance,
+)
 
 __all__ = [
     # Classes
@@ -31,4 +35,8 @@ __all__ = [
 
     # Value Helpers
     replace_invalid_values,
+    
+    # Geometric Calculations
+    geographic_center,
+    calculate_distance,
 ]

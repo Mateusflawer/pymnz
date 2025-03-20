@@ -1,4 +1,5 @@
 from pymnz import utils
+import pytest
 
 
 def test_classes_singleton():
@@ -124,3 +125,32 @@ def test_replace_invalid_values():
     ]
 
     assert cleaned_data == saida, 'Valores inválidos não foram substituídos'
+
+
+def test_geometric_calculations():
+    positions = [
+        (-22.85907757964191, -43.60302741824395),
+        (-22.864870669842283, -43.60151212148426),
+        (-22.871756839811688, -43.61064701478057),
+        (-22.86364283007362, -43.615350147549016)
+    ]
+    centro = utils.geographic_center(positions)
+    
+    assert centro == (-22.864836979842373, -43.60763417551445), 'Centro geográfico incorreto'
+
+    destino = (-22.874471011545886, -43.61149614023986)
+    distance = utils.calculate_distance(*centro, *destino)
+
+    assert distance == 1.1419921539086124, 'Distância incorreta'
+
+
+def test_geometric_calculations_incorrect():
+    positions = []
+
+    with pytest.raises(ValueError, match="A lista de posições não pode estar vazia."):
+        utils.geographic_center(positions)
+
+    centro = (None, None)
+    destino = (-22.874471011545886, -43.61149614023986)
+    result = utils.calculate_distance(*centro, *destino)
+    assert result == 0, 'Não está protegendo contra valores nulos'
