@@ -113,7 +113,7 @@ async def async_update_table_from_dataframe(
     # Substituir valores indesejados por None
     values = replace_invalid_values(values)
 
-    async with conn.begin():
-        await conn.execute(query, values)
+    await conn.execute(query, values)
+    await conn.commit()
 
     return len(df)
