@@ -17,12 +17,14 @@ def test_import_database():
     from pymnz.database import (
         upsert_table_database,
         update_table_from_dataframe,
+        async_update_table_from_dataframe,
         unique_column,
         id_autoincrement,
         table_exists,
     )
     upsert_table_database
     update_table_from_dataframe
+    async_update_table_from_dataframe
     unique_column
     id_autoincrement
     table_exists

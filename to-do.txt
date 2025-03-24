@@ -1,0 +1,9 @@
+# Pendências
+
+1 - Criar função que faz upsert de forma assincrona ✔️
+2 - Criar mais uma parâmetro para a função que faz 
+upsert padrão do mysql para excluir colunas na qual não quero atualizar ✔️
+
+3 - Adicionar opção de não atualizar certas colunas no upsert ✔️
+4 - Criar função de upsert assincrona
+OBS.: para ter um upsert é preciso atualizar a função: unique_column

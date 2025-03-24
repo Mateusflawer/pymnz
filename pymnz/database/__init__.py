@@ -7,6 +7,7 @@ from .inspections import (
 )
 from .updates import (
     update_table_from_dataframe,
+    async_update_table_from_dataframe,
 )
 from .upserts import (
     upsert_table_database,
@@ -17,5 +18,6 @@ __all__ = [
     unique_column,
     table_exists,
     update_table_from_dataframe,
+    async_update_table_from_dataframe,
     upsert_table_database,
 ]

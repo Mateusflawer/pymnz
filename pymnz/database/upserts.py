@@ -4,7 +4,12 @@ from .changes import unique_column, id_autoincrement
 
 
 def upsert_table_database(
-    df, conn, table_name: str, key_col: str, chunk_size: int = 500
+    df,
+    conn,
+    table_name: str,
+    key_col: str,  # coluna de chave primária
+    chunk_size: int = 500,
+    exclude_update_columns: list[str] | str = None
 ) -> int:
     """
     Insere ou atualiza registros de cercas na web.
@@ -58,7 +63,7 @@ def upsert_table_database(
 
         # Atualizar chunk
         rows_affected = update_table_from_dataframe(
-            chunk, table_name, key_col, conn
+            chunk, table_name, key_col, conn, exclude_update_columns
         )
 
         # Somar as linhas afetadas
