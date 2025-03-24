@@ -1,6 +1,6 @@
+from .changes import unique_column, id_autoincrement
 from .updates import update_table_from_dataframe
 from .inspections import table_exists
-from .changes import unique_column, id_autoincrement
 
 
 def upsert_table_database(
