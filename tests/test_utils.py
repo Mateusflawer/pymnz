@@ -153,4 +153,16 @@ def test_geometric_calculations_incorrect():
     centro = (None, None)
     destino = (-22.874471011545886, -43.61149614023986)
     result = utils.calculate_distance(*centro, *destino)
-    assert result == 0, 'Não está protegendo contra valores nulos'
+    assert result == None, 'Não está protegendo corretamente contra valores nulos'
+
+
+def test_geometric_calculations_incorrect_2():
+    positions = [
+        (-22.85907757964191, -43.60302741824395),
+        (None, -43.60151212148426),
+        (-22.864870669842283, None),
+        (-22.86364283007362, -43.615350147549016)
+    ]
+    centro = utils.geographic_center(positions)
+
+    assert centro == None, 'Centro geográfico incorreto'

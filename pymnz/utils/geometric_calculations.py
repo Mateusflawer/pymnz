@@ -13,6 +13,10 @@ def geographic_center(positions: List[Tuple[float, float]]) -> Tuple[float, floa
     if not positions:
         raise ValueError("A lista de posições não pode estar vazia.")
 
+    # Validar as coordenadas
+    if not all(isinstance(coord, (float, int, Decimal)) for coords in positions for coord in coords):
+        return None
+
     # Separa as latitudes e longitudes
     latitudes, longitudes = zip(*positions)
 
@@ -38,7 +42,7 @@ def calculate_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> fl
 
     # Validar as coordenadas
     if not all(isinstance(coord, (float, int, Decimal)) for coord in [lat1, lon1, lat2, lon2]):
-        return 0
+        return None
 
     # Converter para float se os valores forem Decimal
     lat1, lon1, lat2, lon2 = map(float, [lat1, lon1, lat2, lon2])
