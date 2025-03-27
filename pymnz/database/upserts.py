@@ -103,9 +103,6 @@ async def async_upsert_table_database(
     # Substituir valores NaN por None
     df = df.where(pd.notna(df), None)
 
-    print(table_name)
-    print(await async_table_exists(conn, table_name))
-
     # Verifica se a tabela existe
     if not await async_table_exists(conn, table_name):
         logging.info(f"A tabela '{table_name}' não existe. Criando agora...")
