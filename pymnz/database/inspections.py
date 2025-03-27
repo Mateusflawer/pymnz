@@ -15,6 +15,7 @@ def table_exists(conn, table_name: str) -> bool:
             SELECT 1
             FROM information_schema.tables
             WHERE table_name = :table_name
+              AND table_schema = DATABASE()
         );
     """)
 
@@ -33,7 +34,10 @@ async def async_table_exists(conn, table_name: str) -> bool:
 
     query = text("""
         SELECT EXISTS (
-            SELECT 1 FROM information_schema.tables WHERE table_name = :table_name
+            SELECT 1
+            FROM information_schema.tables
+            WHERE table_name = :table_name
+              AND table_schema = DATABASE()
         );
     """)
     result = await conn.execute(query, {"table_name": table_name})

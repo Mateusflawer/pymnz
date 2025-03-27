@@ -96,13 +96,15 @@ async def async_upsert_table_database(
     # Importar somente quando necessário
     import pandas as pd
 
-
     # Verificar se a coluna de chave primária existe
     if key_col not in df.columns:
         raise ValueError(f"A coluna '{key_col}' não existe no DataFrame")
 
     # Substituir valores NaN por None
     df = df.where(pd.notna(df), None)
+
+    print(table_name)
+    print(await async_table_exists(conn, table_name))
 
     # Verifica se a tabela existe
     if not await async_table_exists(conn, table_name):
