@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pymnz",
-    version="0.3.4",
+    version="0.3.5",
     author="Mateus Menezes",
     author_email="mateusflawer@gmail.com",
     description=(
