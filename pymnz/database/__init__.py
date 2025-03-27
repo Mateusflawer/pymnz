@@ -14,6 +14,7 @@ from .updates import (
 )
 from .upserts import (
     upsert_table_database,
+    async_upsert_table_database,
 )
 
 __all__ = [
@@ -26,4 +27,5 @@ __all__ = [
     async_id_autoincrement,
     async_unique_column,
     async_table_exists,
+    async_upsert_table_database,
 ]
