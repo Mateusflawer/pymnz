@@ -37,7 +37,7 @@ def countdown_timer(wait_seconds: int, msg_wait: str = ""):
     print(' ' * 100, end='\r')
 
 
-def retry_on_failure(max_retries: int):
+def retry_on_failure(max_retries: int, retry_interval: int = 5):
     """
     Decorator that retries the execution of a function in case of failure.
     Supports both synchronous and asynchronous functions.
@@ -62,7 +62,7 @@ def retry_on_failure(max_retries: int):
                     attempts += 1
                     logging.error(f"Attempt {attempts}/{max_retries} failed with error: {e}")
                     if attempts < max_retries:
-                        await async_countdown_timer(5 * attempts, 'Retrying in')  # Exponential backoff
+                        await async_countdown_timer(retry_interval * attempts, 'Retrying in')  # Exponential backoff
                     else:
                         logging.error("All retry attempts failed.")
                         return None
@@ -77,7 +77,7 @@ def retry_on_failure(max_retries: int):
                     attempts += 1
                     logging.error(f"Attempt {attempts}/{max_retries} failed with error: {e}")
                     if attempts < max_retries:
-                        countdown_timer(5 * attempts, 'Retrying in')  # Exponential backoff
+                        countdown_timer(retry_interval * attempts, 'Retrying in')  # Exponential backoff
                     else:
                         logging.error("All retry attempts failed.")
                         return None
